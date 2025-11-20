@@ -1,95 +1,205 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
+import { GraduationCap, Users, Calendar, Award, BookOpen, Target } from 'lucide-react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
+
+const features = [
+  {
+    title: 'Highly Qualified Educators',
+    description: 'Learn from tutors with advanced degrees and extensive teaching experience in their subject areas.',
+    icon: GraduationCap,
+    color: 'bg-blue-500',
+  },
+  {
+    title: 'Personalized Approach',
+    description: 'Get customized learning plans adapted to your unique learning style and academic goals.',
+    icon: Users,
+    color: 'bg-purple-500',
+  },
+  {
+    title: 'Flexible Scheduling',
+    description: 'Book sessions 7 days a week with morning, afternoon, and evening slots available.',
+    icon: Calendar,
+    color: 'bg-green-500',
+  },
+  {
+    title: 'Proven Results',
+    description: '95% of our students see significant grade improvement within the first 3 months.',
+    icon: Award,
+    color: 'bg-orange-500',
+  },
+  {
+    title: 'Comprehensive Curriculum',
+    description: 'Access a wide range of subjects and test prep materials for all grade levels.',
+    icon: BookOpen,
+    color: 'bg-pink-500',
+  },
+  {
+    title: 'Goal-Oriented Learning',
+    description: 'Set clear milestones and track progress with regular assessments and feedback.',
+    icon: Target,
+    color: 'bg-cyan-500',
+  },
+];
 
 const Features: React.FC = () => {
+  const prefersReducedMotion = useReducedMotion();
+
+  const cardAnimation = {
+    initial: { opacity: 0, y: prefersReducedMotion ? 0 : 40 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "-100px" },
+    transition: {
+      duration: prefersReducedMotion ? 0 : 0.5,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
+  };
+
+  const hoverAnimation = prefersReducedMotion 
+    ? {} 
+    : { y: -8, scale: 1.01, transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] } };
+
   return (
-    <section className="py-12 px-4 bg-light">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-secondary mb-8">The IDEAL TUTOR For Everyone</h2>
-        
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <p className="text-gray-600">
-            Every student deserves a tutor who can adapt to their unique learning style. Our tutors are carefully selected for their expertise, patience, and ability to connect with students of all ages and abilities.
-          </p>
+    <section className="py-20 relative overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url(/images/S1.jpg)' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/95 via-slate-50/90 to-white/95 backdrop-blur-sm"></div>
+      </div>
+
+      {/* Animated Background Decorations */}
+      {!prefersReducedMotion && (
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute -top-24 -right-24 w-96 h-96 bg-primary-200 rounded-full blur-3xl opacity-30"
+            animate={{
+              scale: [1, 1.15, 1],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            style={{ willChange: 'transform' }}
+          />
+          <motion.div
+            className="absolute -bottom-24 -left-24 w-96 h-96 bg-secondary-200 rounded-full blur-3xl opacity-30"
+            animate={{
+              scale: [1.15, 1, 1.15],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            style={{ willChange: 'transform' }}
+          />
         </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Feature 1 */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <div className="flex items-start mb-4">
-              <div className="bg-primary/10 p-3 rounded-lg mr-4">
-                <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.727 1.666 1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-secondary">Highly Qualified Educators</h3>
-            </div>
-            <ul className="ml-4 space-y-2 text-gray-600">
-              <li className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span>Advanced degrees in their subject areas</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span>Extensive teaching experience</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span>Continuous professional development</span>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Feature 2 */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <div className="flex items-start mb-4">
-              <div className="bg-primary/10 p-3 rounded-lg mr-4">
-                <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-secondary">Personalized Approach</h3>
-            </div>
-            <ul className="ml-4 space-y-2 text-gray-600">
-              <li className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span>Customized learning plans for each student</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span>Adapts to different learning styles</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span>Regular progress assessments</span>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Feature 3 */}
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <div className="flex items-start mb-4">
-              <div className="bg-primary/10 p-3 rounded-lg mr-4">
-                <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-secondary">Flexible Scheduling</h3>
-            </div>
-            <ul className="ml-4 space-y-2 text-gray-600">
-              <li className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span>Sessions available 7 days a week</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span>Morning, afternoon, and evening slots</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary mr-2">•</span>
-                <span>Easy rescheduling when needed</span>
-              </li>
-            </ul>
-          </div>
+      )}
+
+      <div className="container-page relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            style={{ willChange: 'transform, opacity' }}
+          >
+            <motion.h2
+              className="text-4xl md:text-5xl font-bold mb-6"
+              initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.4, delay: prefersReducedMotion ? 0 : 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              The <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-purple-600 to-secondary-600">IDEAL TUTOR</span> For Everyone
+            </motion.h2>
+            <motion.p
+              className="text-lg text-slate-600 leading-relaxed"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.4, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              Every student deserves a tutor who can adapt to their unique learning style.
+              Our tutors are carefully selected for their expertise, patience, and ability to connect.
+            </motion.p>
+          </motion.div>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              {...cardAnimation}
+              initial={{ ...cardAnimation.initial, y: prefersReducedMotion ? 0 : 40 }}
+              transition={{
+                ...cardAnimation.transition,
+                delay: prefersReducedMotion ? 0 : index * 0.1
+              }}
+              whileHover={hoverAnimation}
+              className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-primary-200"
+              style={{ willChange: 'transform, opacity', transformStyle: 'preserve-3d' }}
+            >
+              {/* Animated Icon */}
+              <motion.div
+                className={`w-16 h-16 rounded-2xl ${feature.color} bg-opacity-10 flex items-center justify-center mb-6 relative overflow-hidden`}
+                whileHover={prefersReducedMotion ? {} : { rotate: 360, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } }}
+                style={{ willChange: 'transform' }}
+              >
+                {!prefersReducedMotion && (
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent"
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    style={{ willChange: 'transform' }}
+                  />
+                )}
+                {!prefersReducedMotion && (
+                  <motion.div
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    style={{ willChange: 'transform' }}
+                  >
+                    <feature.icon className={`w-8 h-8 ${feature.color.replace('bg-', 'text-')} relative z-10`} />
+                  </motion.div>
+                )}
+                {prefersReducedMotion && (
+                  <feature.icon className={`w-8 h-8 ${feature.color.replace('bg-', 'text-')} relative z-10`} />
+                )}
+              </motion.div>
+
+              <motion.h3
+                className="text-xl font-bold text-slate-900 mb-3 group-hover:text-primary-600 transition-colors"
+                whileHover={prefersReducedMotion ? {} : { x: 4, transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] } }}
+              >
+                {feature.title}
+              </motion.h3>
+
+              <p className="text-slate-600 leading-relaxed">
+                {feature.description}
+              </p>
+
+              {/* Animated Bottom Border */}
+              <motion.div
+                className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 via-purple-500 to-secondary-500 rounded-b-2xl"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : index * 0.08 + 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                style={{ transformOrigin: 'left', willChange: 'transform' }}
+              />
+
+              {/* Glow Effect on Hover */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary-500/0 to-secondary-500/0 group-hover:from-primary-500/5 group-hover:to-secondary-500/5 transition-all duration-300 pointer-events-none"></div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
