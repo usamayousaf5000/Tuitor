@@ -53,13 +53,13 @@ const Features: React.FC = () => {
     viewport: { once: true, margin: "-100px" },
     transition: {
       duration: prefersReducedMotion ? 0 : 0.5,
-      ease: [0.25, 0.1, 0.25, 1]
+      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number]
     }
   };
 
   const hoverAnimation = prefersReducedMotion 
     ? {} 
-    : { y: -8, scale: 1.01, transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] } };
+    : { y: -8, scale: 1.01, transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] } };
 
   return (
     <section className="py-20 relative overflow-hidden">
@@ -140,7 +140,8 @@ const Features: React.FC = () => {
               {...cardAnimation}
               initial={{ ...cardAnimation.initial, y: prefersReducedMotion ? 0 : 40 }}
               transition={{
-                ...cardAnimation.transition,
+                duration: cardAnimation.transition.duration,
+                ease: cardAnimation.transition.ease,
                 delay: prefersReducedMotion ? 0 : index * 0.1
               }}
               whileHover={hoverAnimation}
