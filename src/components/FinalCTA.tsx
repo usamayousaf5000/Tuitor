@@ -17,7 +17,7 @@ const FinalCTA: React.FC<Props> = ({ onContact }) => {
     viewport: { once: true, margin: "-100px" },
     transition: {
       duration: prefersReducedMotion ? 0 : 0.6,
-      ease: [0.25, 0.1, 0.25, 1]
+      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number]
     }
   };
 
@@ -75,7 +75,7 @@ const FinalCTA: React.FC<Props> = ({ onContact }) => {
               initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
               whileHover={prefersReducedMotion ? {} : { scale: 1.05, transition: { duration: 0.2 } }}
             >
               <motion.div
@@ -93,7 +93,7 @@ const FinalCTA: React.FC<Props> = ({ onContact }) => {
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.3, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
               style={{ willChange: 'transform, opacity' }}
             >
               Ready to Transform Your <br />
@@ -122,7 +122,7 @@ const FinalCTA: React.FC<Props> = ({ onContact }) => {
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.4, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
               style={{ willChange: 'transform, opacity' }}
             >
               Join thousands of students who have achieved academic excellence with our personalized tutoring services.
@@ -134,7 +134,7 @@ const FinalCTA: React.FC<Props> = ({ onContact }) => {
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
               style={{ willChange: 'transform, opacity' }}
             >
               <motion.button
@@ -178,7 +178,7 @@ const FinalCTA: React.FC<Props> = ({ onContact }) => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.6, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
             >
               No commitment required. 100% satisfaction guaranteed.
             </motion.p>
