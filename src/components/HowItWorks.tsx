@@ -39,7 +39,7 @@ const HowItWorks: React.FC = () => {
     viewport: { once: true, margin: "-50px" },
     transition: {
       duration: prefersReducedMotion ? 0 : 0.4,
-      ease: [0.25, 0.1, 0.25, 1]
+      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number]
     }
   };
 
@@ -72,7 +72,8 @@ const HowItWorks: React.FC = () => {
               key={step.n}
               {...stepAnimation}
               transition={{
-                ...stepAnimation.transition,
+                duration: stepAnimation.transition.duration,
+                ease: stepAnimation.transition.ease,
                 delay: prefersReducedMotion ? 0 : index * 0.15
               }}
               className="relative z-10"
@@ -98,7 +99,8 @@ const HowItWorks: React.FC = () => {
         <motion.div
           {...stepAnimation}
           transition={{
-            ...stepAnimation.transition,
+            duration: stepAnimation.transition.duration,
+            ease: stepAnimation.transition.ease,
             delay: prefersReducedMotion ? 0 : 0.4
           }}
           className="mt-16 text-center"

@@ -60,7 +60,7 @@ const Testimonials: React.FC = () => {
           transition={{
             duration: 15,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut" as const
           }}
         />
       </div>
@@ -139,7 +139,7 @@ const Testimonials: React.FC = () => {
                 transition={{
                   duration: 20,
                   repeat: Infinity,
-                  ease: "linear"
+                  ease: "linear" as const
                 }}
               >
                 <Quote className="w-12 h-12 text-primary-600" />

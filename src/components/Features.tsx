@@ -83,7 +83,7 @@ const Features: React.FC = () => {
             transition={{
               duration: 25,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut" as const
             }}
             style={{ willChange: 'transform' }}
           />
@@ -95,7 +95,7 @@ const Features: React.FC = () => {
             transition={{
               duration: 25,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut" as const
             }}
             style={{ willChange: 'transform' }}
           />
@@ -108,7 +108,7 @@ const Features: React.FC = () => {
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
             style={{ willChange: 'transform, opacity' }}
           >
             <motion.h2
@@ -116,7 +116,7 @@ const Features: React.FC = () => {
               initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.4, delay: prefersReducedMotion ? 0 : 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.4, delay: prefersReducedMotion ? 0 : 0.1, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
             >
               The <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-purple-600 to-secondary-600">IDEAL TUTOR</span> For Everyone
             </motion.h2>
@@ -125,7 +125,7 @@ const Features: React.FC = () => {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.4, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.4, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
             >
               Every student deserves a tutor who can adapt to their unique learning style.
               Our tutors are carefully selected for their expertise, patience, and ability to connect.
@@ -151,21 +151,21 @@ const Features: React.FC = () => {
               {/* Animated Icon */}
               <motion.div
                 className={`w-16 h-16 rounded-2xl ${feature.color} bg-opacity-10 flex items-center justify-center mb-6 relative overflow-hidden`}
-                whileHover={prefersReducedMotion ? {} : { rotate: 360, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } }}
+                whileHover={prefersReducedMotion ? {} : { rotate: 360, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] } }}
                 style={{ willChange: 'transform' }}
               >
                 {!prefersReducedMotion && (
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent"
                     animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" as const }}
                     style={{ willChange: 'transform' }}
                   />
                 )}
                 {!prefersReducedMotion && (
                   <motion.div
                     animate={{ y: [0, -4, 0] }}
-                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" as const }}
                     style={{ willChange: 'transform' }}
                   >
                     <feature.icon className={`w-8 h-8 ${feature.color.replace('bg-', 'text-')} relative z-10`} />
@@ -178,7 +178,7 @@ const Features: React.FC = () => {
 
               <motion.h3
                 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-primary-600 transition-colors"
-                whileHover={prefersReducedMotion ? {} : { x: 4, transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] } }}
+                whileHover={prefersReducedMotion ? {} : { x: 4, transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] } }}
               >
                 {feature.title}
               </motion.h3>
@@ -193,7 +193,7 @@ const Features: React.FC = () => {
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : index * 0.08 + 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : index * 0.08 + 0.3, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }}
                 style={{ transformOrigin: 'left', willChange: 'transform' }}
               />
 

@@ -12,18 +12,25 @@ const Hero: React.FC = () => {
   const fadeInUp = {
     initial: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: prefersReducedMotion ? 0 : 0.5, ease: [0.25, 0.1, 0.25, 1] }
+    transition: { duration: prefersReducedMotion ? 0 : 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }
   };
 
   const fadeInRight = {
     initial: { opacity: 0, x: prefersReducedMotion ? 0 : 20 },
     animate: { opacity: 1, x: 0 },
-    transition: { duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.25, 0.1, 0.25, 1] }
+    transition: { duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }
   };
 
   const floatAnimation = prefersReducedMotion 
     ? {} 
-    : { y: [-8, 8, -8], transition: { duration: 4, repeat: Infinity, ease: "easeInOut" } };
+    : { 
+        y: [-8, 8, -8], 
+        transition: { 
+          duration: 4, 
+          repeat: Infinity, 
+          ease: "easeInOut" as const
+        } 
+      };
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
@@ -116,7 +123,7 @@ const Hero: React.FC = () => {
               </motion.div>
 
               <motion.div
-                animate={prefersReducedMotion ? {} : { y: [8, -8, 8], transition: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 } }}
+                animate={prefersReducedMotion ? {} : { y: [8, -8, 8], transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const, delay: 1 } }}
                 className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50"
                 style={{ willChange: 'transform' }}
               >

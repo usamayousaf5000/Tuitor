@@ -39,7 +39,7 @@ const FinalCTA: React.FC<Props> = ({ onContact }) => {
                 transition={{
                   duration: 20,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: "easeInOut" as const
                 }}
                 style={{ willChange: 'transform' }}
               />
@@ -53,7 +53,7 @@ const FinalCTA: React.FC<Props> = ({ onContact }) => {
                 transition={{
                   duration: 20,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: "easeInOut" as const,
                   delay: 2
                 }}
                 style={{ willChange: 'transform' }}
@@ -105,7 +105,7 @@ const FinalCTA: React.FC<Props> = ({ onContact }) => {
                 transition={{
                   duration: 5,
                   repeat: Infinity,
-                  ease: "linear"
+                  ease: "linear" as const
                 }}
                 style={{
                   backgroundSize: '200% 200%',

@@ -1,6 +1,6 @@
 // Next.js ESLint configuration
-// Next.js will use its built-in ESLint config by default
-// This file ensures compatibility with the flat config format
+// Next.js uses its built-in ESLint config during build
+// This minimal config prevents the empty config warning
 export default [
   {
     ignores: ['.next/**', 'out/**', 'node_modules/**'],
