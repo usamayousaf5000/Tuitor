@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Linkedin, Youtube, MapPin, Mail, Phone, Clock, ArrowRight, GraduationCap, FileText } from 'lucide-react';
+import { Facebook, Instagram, Youtube, MapPin, Mail, ArrowRight, FileText } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -10,19 +10,15 @@ const Footer: React.FC = () => {
   const quickLinks = [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
-    { name: 'Subjects', href: '/subjects' },
     { name: 'Curriculum', href: '/curriculum' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Contact Us', href: '/contact' },
   ];
 
-  const popularSubjects = [
-    { name: 'Mathematics', href: '/subjects' },
-    { name: 'Science', href: '/subjects' },
-    { name: 'English', href: '/subjects' },
-    { name: 'History', href: '/subjects' },
-    { name: 'Computer Science', href: '/subjects' },
-    { name: 'Foreign Languages', href: '/subjects' },
+  const curriculumLinks = [
+    { name: 'United Kingdom Curriculum', href: '/test/11-plus', flag: '🇬🇧' },
+    { name: 'Canada Curriculum', href: '/curriculum', flag: '🇨🇦' },
+    { name: 'Australia Curriculum', href: '/test/naplan', flag: '🇦🇺' },
   ];
 
   return (
@@ -37,22 +33,36 @@ const Footer: React.FC = () => {
           {/* Column 1: Tuitor */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 group">
-              <GraduationCap className="w-6 h-6 text-white" />
-              <span className="text-2xl font-bold text-white">Tuitor</span>
+              <span className="text-2xl font-bold text-white">Think Hub Tutors</span>
             </Link>
             <p className="text-slate-400 leading-relaxed text-sm">
               Empowering students to reach their full potential through personalized tutoring, innovative teaching methods, and a supportive learning environment.
             </p>
             <div className="flex gap-3">
-              {[Facebook, Twitter, Instagram, Linkedin, Youtube].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300"
-                >
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
+              <a
+                href="https://www.facebook.com/profile.php?id=61579724516600"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300"
+              >
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.instagram.com/thinkhubtutors/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.youtube.com/@thinkhubtutors"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all duration-300"
+              >
+                <Youtube className="w-4 h-4" />
+              </a>
             </div>
           </div>
 
@@ -74,18 +84,18 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 3: Popular Subjects */}
+          {/* Column 3: Curriculum */}
           <div>
             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
               <FileText className="w-5 h-5" />
-              Popular Subjects
+              Curriculum
             </h3>
             <ul className="space-y-3">
-              {popularSubjects.map((subject) => (
-                <li key={subject.name}>
-                  <Link href={subject.href} className="flex items-center gap-2 hover:text-white transition-colors text-sm">
-                    <ArrowRight className="w-4 h-4" />
-                    {subject.name}
+              {curriculumLinks.map((link) => (
+                <li key={link.name}>
+                  <Link href={link.href} className="flex items-center gap-2 hover:text-white transition-colors text-sm">
+                    <span>{link.flag}</span>
+                    <span>{link.name}</span>
                   </Link>
                 </li>
               ))}
@@ -101,25 +111,32 @@ const Footer: React.FC = () => {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-slate-400 mt-0.5 flex-shrink-0" />
-                <p className="text-slate-400 text-sm">123 Education Street<br />Learning City, LC 12345</p>
+                <p className="text-slate-400 text-sm">Avenue HQ, 17 Mann Island<br />Liverpool L3 1BP, United Kingdom</p>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-slate-400 flex-shrink-0" />
-                <a href="mailto:info@tuitor.com" className="text-slate-400 hover:text-white transition-colors text-sm">
-                  info@tuitor.com
+                <a href="mailto:thinkhubtutors@gmail.com" className="text-slate-400 hover:text-white transition-colors text-sm">
+                  thinkhubtutors@gmail.com
                 </a>
               </div>
-              <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-slate-400 flex-shrink-0" />
-                <a href="tel:+11234567890" className="text-slate-400 hover:text-white transition-colors text-sm">
-                  (123) 456-7890
-                </a>
-              </div>
-              <div className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-slate-400 mt-0.5 flex-shrink-0" />
-                <div className="text-slate-400 text-sm">
-                  <p>Mon-Fri: 9:00 AM - 6:00 PM</p>
-                  <p>Sat: 10:00 AM - 4:00 PM</p>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <a href="tel:+447367067438" className="text-slate-400 hover:text-white transition-colors text-sm flex items-center gap-2">
+                    <span>🇬🇧</span>
+                    <span>United Kingdom: +44 7367 067438</span>
+                  </a>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a href="tel:+15878700861" className="text-slate-400 hover:text-white transition-colors text-sm flex items-center gap-2">
+                    <span>🇨🇦</span>
+                    <span>Canada: +1 (587) 870-0861</span>
+                  </a>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a href="tel:+61480009464" className="text-slate-400 hover:text-white transition-colors text-sm flex items-center gap-2">
+                    <span>🇦🇺</span>
+                    <span>Australia: +61 480 009 464</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -129,7 +146,7 @@ const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-slate-500">
-            © {currentYear} Tuitor. All rights reserved.
+            © {currentYear} Think Hub Tutors. All rights reserved.
           </p>
           <div className="flex gap-4 text-sm text-slate-500">
             <Link href="/privacy" className="hover:text-white transition-colors">

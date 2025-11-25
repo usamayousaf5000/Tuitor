@@ -2,14 +2,25 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaHeadset, FaComments } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaHeadset, FaComments } from 'react-icons/fa';
 
 const Contact: React.FC = () => {
   return (
     <main className="bg-white text-gray-800">
       {/* Hero Section */}
-      <section className="pt-28 pb-16 px-6 sm:px-10 lg:px-16 bg-blue-900 text-white">
-        <div className="max-w-6xl mx-auto text-center">
+      <section className="relative h-[600px] pt-28 pb-16 px-6 sm:px-10 lg:px-16 text-white overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0 h-[600px]">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat h-full"
+            style={{
+              backgroundImage: 'url(/images/contact.jpg)',
+            }}
+          >
+          </div>
+          <div className="absolute inset-0 bg-blue-900/70 h-full"></div>
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto text-center h-full flex flex-col justify-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,7 +51,7 @@ const Contact: React.FC = () => {
               <FaHeadset className="text-blue-300 text-2xl mr-3" />
               <div className="text-left">
                 <p className="text-blue-300 text-sm">Call us at</p>
-                <p className="text-white font-bold">+1 (800) 555-1234</p>
+                <p className="text-white font-bold flex items-center gap-2">🇬🇧 +44 7367 067438</p>
               </div>
             </motion.div>
             <motion.div 
@@ -51,7 +62,7 @@ const Contact: React.FC = () => {
               <FaComments className="text-blue-300 text-2xl mr-3" />
               <div className="text-left">
                 <p className="text-blue-300 text-sm">Email us at</p>
-                <p className="text-white font-bold">contact@tuitor.com</p>
+                <p className="text-white font-bold">thinkhubtutors@gmail.com</p>
               </div>
             </motion.div>
           </motion.div>
@@ -156,10 +167,9 @@ const Contact: React.FC = () => {
               <h2 className="text-3xl font-bold text-blue-900 mb-8">Contact Information</h2>
               
               {[
-                { icon: <FaPhone className="text-white text-2xl" />, title: 'Phone', items: ['Main: +1 (800) 555-1234', 'Support: +1 (800) 555-5678'] },
-                { icon: <FaEnvelope className="text-white text-2xl" />, title: 'Email', items: ['General: contact@tuitor.com', 'Support: support@tuitor.com'] },
-                { icon: <FaMapMarkerAlt className="text-white text-2xl" />, title: 'Office Location', items: ['123 Education Avenue', 'Suite 200', 'New York, NY 10001'] },
-                { icon: <FaClock className="text-white text-2xl" />, title: 'Hours of Operation', items: ['Monday - Friday: 8:00 AM - 9:00 PM EST', 'Saturday: 9:00 AM - 5:00 PM EST', 'Sunday: 12:00 PM - 5:00 PM EST'] }
+                { icon: <FaPhone className="text-white text-2xl" />, title: 'Phone', items: ['🇬🇧 United Kingdom: +44 7367 067438', '🇨🇦 Canada: +1 (587) 870-0861', '🇦🇺 Australia: +61 480 009 464'] },
+                { icon: <FaEnvelope className="text-white text-2xl" />, title: 'Email', items: ['thinkhubtutors@gmail.com'] },
+                { icon: <FaMapMarkerAlt className="text-white text-2xl" />, title: 'Office Location', items: ['Avenue HQ, 17 Mann Island', 'Liverpool L3 1BP', 'United Kingdom'] }
               ].map((contact, index) => (
                 <motion.div 
                   key={contact.title}

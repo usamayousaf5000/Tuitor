@@ -35,8 +35,19 @@ const Pricing: React.FC = () => {
   return (
     <main className="bg-white text-gray-800">
       {/* Hero Section */}
-      <section className="pt-28 pb-16 px-6 sm:px-10 lg:px-16 bg-blue-900 text-white">
-        <div className="max-w-6xl mx-auto text-center">
+      <section className="relative h-[600px] pt-28 pb-16 px-6 sm:px-10 lg:px-16 text-white overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0 h-[600px]">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat h-full"
+            style={{
+              backgroundImage: 'url(/images/pricing.jpg)',
+            }}
+          >
+          </div>
+          <div className="absolute inset-0 bg-blue-900/70 h-full"></div>
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto text-center h-full flex flex-col justify-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

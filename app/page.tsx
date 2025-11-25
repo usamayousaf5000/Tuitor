@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import Hero from '../src/components/Hero';
 import Features from '../src/components/Features';
-import Subjects from '../src/components/Subjects';
+import TutoringFeatures from '../src/components/TutoringFeatures';
 import HowItWorks from '../src/components/HowItWorks';
-import Testimonials from '../src/components/Testimonials';
+import MissionVision from '../src/components/MissionVision';
 import FinalCTA from '../src/components/FinalCTA';
 import ContactModal from '../src/components/ContactModal';
 
@@ -35,9 +35,9 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Popular Subjects Section */}
+      {/* Tutoring without the hassle Section */}
       <section>
-        <Subjects />
+        <TutoringFeatures />
       </section>
       
       {/* How It Works Section */}
@@ -57,9 +57,9 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Testimonials Section */}
+      {/* Mission & Vision Section */}
       <section>
-        <Testimonials />
+        <MissionVision />
       </section>
       
       {/* Final CTA Section */}
