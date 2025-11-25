@@ -1,76 +1,118 @@
-import React from 'react';
+'use client';
+
+import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, User, Mail, Phone, MapPin } from 'lucide-react';
 
 interface ContactModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
-const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
+export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const name = 'Think Hub Tutors';
+  const email = 'thinkhubtutors@gmail.com';
+  const ukPhone = '+44 7367067438';
+  const caPhone = '+1 (587) 870-0861';
+
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose?.();
+    }
+    if (isOpen) document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [isOpen, onClose]);
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 max-w-md w-full border-2 border-transparent bg-clip-padding shadow-2xl">
-        {/* Gradient Border */}
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-3xl -z-10"></div>
-        
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-slate-900/80 backdrop-blur-sm"
+            onClick={onClose}
+          />
 
-        <h2 className="text-3xl font-bold text-white mb-6 text-center bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-          Contact Us
-        </h2>
-        
-        {/* Contact Information */}
-        <div className="mb-2 p-6 bg-slate-700/30 rounded-2xl border border-slate-600/50">
-          <h3 className="text-lg font-semibold text-white mb-4 text-center">Get in Touch</h3>
-          <div className="space-y-3">
-            <div className="flex items-center justify-center space-x-3">
-              <div className="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="relative z-10 w-full max-w-lg rounded-3xl bg-slate-900 border border-white/10 shadow-2xl overflow-hidden"
+          >
+            {/* Header */}
+            <div className="relative p-6 sm:p-8 border-b border-white/10 bg-gradient-to-r from-primary-900/20 to-secondary-900/20">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-white">Contact Information</h2>
+                <button
+                  onClick={onClose}
+                  className="p-2 rounded-full hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+                  aria-label="Close"
+                >
+                  <X className="w-6 h-6" />
+                </button>
               </div>
-              <span className="text-gray-300">Think Hub Tutors</span>
+              <p className="text-slate-400 mt-2">
+                Get in touch with us directly. We're here to help!
+              </p>
             </div>
 
-            <div className="space-y-2">
-              <div className="flex items-center justify-center space-x-3">
-                <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center"><span className="text-lg">🇬🇧</span></div>
-                <a href="tel:+447367067438" className="text-gray-300 hover:text-purple-300 transition-colors">+44 7367067438</a>
+            {/* Content */}
+            <div className="p-6 sm:p-8 space-y-6">
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-primary-500/10 flex items-center justify-center group-hover:bg-primary-500/20 transition-colors">
+                  <User className="w-6 h-6 text-primary-400" />
+                </div>
+                <div>
+                  <div className="text-slate-400 text-sm font-medium mb-1">Name</div>
+                  <div className="text-white text-lg font-semibold">{name}</div>
+                </div>
               </div>
-              <div className="flex items-center justify-center space-x-3">
-                <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center"><span className="text-lg">🇨🇦</span></div>
-                <a href="tel:+15878700861" className="text-gray-300 hover:text-purple-300 transition-colors">+1 (587) 870-0861</a>
-              </div>
-            </div>
 
-            <div className="flex items-center justify-center space-x-3">
-              <div className="w-8 h-8 bg-pink-500/20 rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
+              <div className="flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-secondary-500/10 flex items-center justify-center group-hover:bg-secondary-500/20 transition-colors">
+                  <Mail className="w-6 h-6 text-secondary-400" />
+                </div>
+                <div>
+                  <div className="text-slate-400 text-sm font-medium mb-1">Email</div>
+                  <a href={`mailto:${email}`} className="text-white text-lg font-semibold hover:text-primary-400 transition-colors">
+                    {email}
+                  </a>
+                </div>
               </div>
-              <a href="mailto:thinkhubtutors@gmail.com" className="text-gray-300 hover:text-pink-300 transition-colors">thinkhubtutors@gmail.com</a>
+
+              {ukPhone && (
+                <div className="flex items-center gap-4 group">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors">
+                    <Phone className="w-6 h-6 text-emerald-400" />
+                  </div>
+                  <div>
+                    <div className="text-slate-400 text-sm font-medium mb-1">United Kingdom</div>
+                    <a href={`tel:${ukPhone}`} className="text-white text-lg font-semibold hover:text-primary-400 transition-colors">
+                      {ukPhone}
+                    </a>
+                  </div>
+                </div>
+              )}
+
+              {caPhone && (
+                <div className="flex items-center gap-4 group">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-500/10 flex items-center justify-center group-hover:bg-rose-500/20 transition-colors">
+                    <Phone className="w-6 h-6 text-rose-400" />
+                  </div>
+                  <div>
+                    <div className="text-slate-400 text-sm font-medium mb-1">Canada</div>
+                    <a href={`tel:${caPhone}`} className="text-white text-lg font-semibold hover:text-primary-400 transition-colors">
+                      {caPhone}
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
+          </motion.div>
         </div>
-        
-        <div className="mt-6 text-center">
-          <p className="text-gray-300 text-sm">
-            Feel free to reach out to us for any inquiries or questions.
-          </p>
-        </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
-};
-
-export default ContactModal;
+}

@@ -1,127 +1,152 @@
+'use client';
+
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaGraduationCap, FaUserFriends, FaClock } from 'react-icons/fa';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ArrowRight, CheckCircle, Star, Users, Shield } from 'lucide-react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const Hero: React.FC = () => {
+  const prefersReducedMotion = useReducedMotion();
+  
+  const fadeInUp = {
+    initial: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: prefersReducedMotion ? 0 : 0.5, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }
+  };
+
+  const fadeInRight = {
+    initial: { opacity: 0, x: prefersReducedMotion ? 0 : 20 },
+    animate: { opacity: 1, x: 0 },
+    transition: { duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }
+  };
+
+  const floatAnimation = prefersReducedMotion 
+    ? {} 
+    : { 
+        y: [-8, 8, -8], 
+        transition: { 
+          duration: 4, 
+          repeat: Infinity, 
+          ease: "easeInOut" as const
+        } 
+      };
+
   return (
-    <section className="relative pt-28 pb-20 px-4 bg-gradient-to-br from-blue-800 to-blue-900 text-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Main Hero Section */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
-          <div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-              Achieve Academic Excellence with Expert Online Tutoring
+    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-primary-100/50 rounded-full blur-3xl opacity-30 animate-blob"></div>
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-secondary-100/50 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-32 left-0 w-[600px] h-[600px] bg-accent-100/50 rounded-full blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+      </div>
+
+      <div className="container-page relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          {/* Text Content */}
+          <motion.div
+            {...fadeInUp}
+            style={{ willChange: 'transform, opacity' }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-6">
+              <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+              <span className="text-sm font-medium text-slate-600">Accepting new students for 2025</span>
+            </div>
+
+            <h1 className="text-5xl lg:text-7xl font-bold leading-tight tracking-tight text-slate-900 mb-6">
+              Unlock Your <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
+                Full Potential
+              </span>
             </h1>
-            <p className="mt-6 text-blue-100 text-lg">
-              Our experienced tutors provide personalized learning plans to help students of all ages and abilities excel in their studies and build confidence.
+
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg">
+              Expert online tutoring tailored to your unique learning style.
+              Join thousands of students achieving academic excellence with Tuitor.
             </p>
-            <ul className="mt-8 space-y-4">
-              <li className="flex items-center text-blue-100">
-                <svg className="w-6 h-6 mr-3 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-lg">Personalized 1-on-1 learning experience</span>
-              </li>
-              <li className="flex items-center text-blue-100">
-                <svg className="w-6 h-6 mr-3 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-lg">Expert tutors with proven success records</span>
-              </li>
-              <li className="flex items-center text-blue-100">
-                <svg className="w-6 h-6 mr-3 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-lg">Flexible scheduling to fit your lifestyle</span>
-              </li>
-            </ul>
-            
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link to="/pricing" className="px-8 py-4 bg-green-500 text-white font-semibold rounded-full hover:bg-green-600 transition-colors text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200">
-                View Pricing
+
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <Link href="/register" className="btn-primary text-lg px-8 py-4 shadow-xl shadow-primary-500/20 hover:scale-105 transition-transform">
+                Start Learning Now
+              </Link>
+              <Link href="/how-it-works" className="btn-secondary text-lg px-8 py-4 hover:bg-slate-50">
+                How It Works
               </Link>
             </div>
-          </div>
-          
-          {/* Hero Image */}
-          <div className="relative">
-            <div className="bg-white p-4 rounded-xl shadow-2xl overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
-                alt="Online tutoring session" 
-                className="w-full h-auto rounded-lg object-cover"
+
+            <div className="flex items-center gap-8 text-slate-500">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-green-500" />
+                <span className="text-sm font-medium">Verified Tutors</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-green-500" />
+                <span className="text-sm font-medium">Flexible Schedule</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-green-500" />
+                <span className="text-sm font-medium">Money-back Guarantee</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Visual Content */}
+          <motion.div
+            {...fadeInRight}
+            className="relative"
+            style={{ willChange: 'transform, opacity' }}
+          >
+            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-8 border-white/50 backdrop-blur-sm">
+              <img
+                src="/images/Hero2.jpg"
+                alt="Student learning online"
+                className="w-full h-auto object-cover scale-105 hover:scale-110 transition-transform duration-700"
               />
-              
-              {/* Floating Stats Card */}
-              <div className="absolute -bottom-5 -right-5 bg-white rounded-xl shadow-xl p-4 w-48 transform hover:scale-105 transition-transform duration-200">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-blue-900 font-bold">Success Rate</span>
-                  <span className="text-green-500 font-bold">95%</span>
+
+              {/* Floating Cards */}
+              <motion.div
+                animate={floatAnimation}
+                className="absolute top-8 right-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 max-w-[200px]"
+                style={{ willChange: 'transform' }}
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-yellow-100 rounded-lg text-yellow-600">
+                    <Star className="w-5 h-5 fill-current" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 font-medium">Rating</p>
+                    <p className="text-lg font-bold text-slate-900">4.9/5.0</p>
+                  </div>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="bg-green-500 h-2 rounded-full" style={{ width: '95%' }}></div>
+                <p className="text-xs text-slate-500">Based on 2,000+ reviews</p>
+              </motion.div>
+
+              <motion.div
+                animate={prefersReducedMotion ? {} : { y: [8, -8, 8], transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const, delay: 1 } }}
+                className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50"
+                style={{ willChange: 'transform' }}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="flex -space-x-3">
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center overflow-hidden">
+                        <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" />
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-900">10k+ Students</p>
+                    <p className="text-xs text-slate-500">Joined this month</p>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
-        </div>
-        
-        {/* Floating Achievement Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-          <div className="bg-white rounded-xl shadow-xl p-6 transform hover:scale-105 transition-transform duration-200">
-            <div className="flex items-center">
-              <div className="bg-blue-100 p-3 rounded-full mr-4">
-                <FaGraduationCap className="w-8 h-8 text-blue-600" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-500">Students Taught</p>
-                <p className="text-2xl font-bold text-blue-900">5,000+</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-xl shadow-xl p-6 transform hover:scale-105 transition-transform duration-200">
-            <div className="flex items-center">
-              <div className="bg-blue-100 p-3 rounded-full mr-4">
-                <FaUserFriends className="w-8 h-8 text-blue-600" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-500">Expert Tutors</p>
-                <p className="text-2xl font-bold text-blue-900">100+</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-xl shadow-xl p-6 transform hover:scale-105 transition-transform duration-200">
-            <div className="flex items-center">
-              <div className="bg-blue-100 p-3 rounded-full mr-4">
-                <FaClock className="w-8 h-8 text-blue-600" />
-              </div>
-              <div>
-                <p className="text-sm text-gray-500">Years Experience</p>
-                <p className="text-2xl font-bold text-blue-900">15+</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Trusted By Section */}
-        <div className="mt-16 text-center">
-          <p className="text-xl font-semibold text-blue-200 mb-8">Trusted by parents and schools across the country</p>
-          <div className="flex flex-wrap justify-center gap-8 opacity-80">
-            <div className="h-12 w-32 bg-white rounded-lg opacity-80 flex items-center justify-center">
-              <span className="text-blue-900 font-bold">School Logo</span>
-            </div>
-            <div className="h-12 w-32 bg-white rounded-lg opacity-80 flex items-center justify-center">
-              <span className="text-blue-900 font-bold">School Logo</span>
-            </div>
-            <div className="h-12 w-32 bg-white rounded-lg opacity-80 flex items-center justify-center">
-              <span className="text-blue-900 font-bold">School Logo</span>
-            </div>
-            <div className="h-12 w-32 bg-white rounded-lg opacity-80 flex items-center justify-center">
-              <span className="text-blue-900 font-bold">School Logo</span>
-            </div>
-          </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -top-12 -right-12 w-24 h-24 bg-primary-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div className="absolute -bottom-12 -left-12 w-24 h-24 bg-secondary-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+          </motion.div>
         </div>
       </div>
     </section>
