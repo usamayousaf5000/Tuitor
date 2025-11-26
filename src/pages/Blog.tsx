@@ -312,7 +312,7 @@ const Blog: React.FC = () => {
                 
                 // Check if paragraph starts with a number (like "1.", "2.", etc.) for numbered items
                 if (/^\d+\.\s+[A-Z]/.test(trimmed)) {
-                  const match = trimmed.match(/^(\d+)\.\s+(.+?):\s*(.+)/s);
+                  const match = trimmed.match(/^(\d+)\.\s+(.+?):\s*([\s\S]+)/);
                   if (match) {
                     const [, num, title, content] = match;
                     return (
