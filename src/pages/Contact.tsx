@@ -1,23 +1,78 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaHeadset, FaComments } from 'react-icons/fa';
 
 const Contact: React.FC = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const heroImg = new Image();
+    heroImg.src = '/images/contact.jpg';
+    heroImg.onload = () => setHeroImageLoaded(true);
+  }, []);
+
+  const sendWhatsApp = () => {
+    const whatsappMessage = `Hello! I would like to get in touch.
+
+Name: ${firstName} ${lastName}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
+Subject: ${subject || 'Not provided'}
+
+Message:
+${message}`;
+
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    window.open("https://wa.me/447367067438?text=" + encodedMessage, "_blank");
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    sendWhatsApp();
+  };
+
   return (
     <main className="bg-white text-gray-800">
       {/* Hero Section */}
       <section className="relative h-[600px] pt-28 pb-16 px-6 sm:px-10 lg:px-16 text-white overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0 h-[600px]">
-          <div 
+          {/* Loading Skeleton */}
+          {!heroImageLoaded && (
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-200 via-blue-300 to-blue-200 h-full"
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              style={{
+                backgroundSize: '200% 100%',
+              }}
+            />
+          )}
+          {/* Actual Image */}
+          <motion.div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat h-full"
             style={{
               backgroundImage: 'url(/images/contact.jpg)',
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: heroImageLoaded ? 1 : 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-          </div>
+          </motion.div>
           <div className="absolute inset-0 bg-blue-900/70 h-full"></div>
         </div>
         <div className="relative z-10 max-w-6xl mx-auto text-center h-full flex flex-col justify-center">
@@ -83,13 +138,15 @@ const Contact: React.FC = () => {
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               <h2 className="text-3xl font-bold text-blue-900 mb-8">Send Us a Message</h2>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="firstName" className="block text-gray-700 font-medium mb-2">First Name</label>
                     <input 
                       type="text" 
                       id="firstName" 
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                       placeholder="Your first name"
                     />
@@ -99,6 +156,8 @@ const Contact: React.FC = () => {
                     <input 
                       type="text" 
                       id="lastName" 
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                       placeholder="Your last name"
                     />
@@ -109,6 +168,8 @@ const Contact: React.FC = () => {
                   <input 
                     type="email" 
                     id="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     placeholder="Your email address"
                   />
@@ -118,6 +179,8 @@ const Contact: React.FC = () => {
                   <input 
                     type="tel" 
                     id="phone" 
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     placeholder="Your phone number"
                   />
@@ -126,6 +189,8 @@ const Contact: React.FC = () => {
                   <label htmlFor="subject" className="block text-gray-700 font-medium mb-2">Subject</label>
                   <select 
                     id="subject" 
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                   >
                     <option value="">Select a subject</option>
@@ -141,6 +206,8 @@ const Contact: React.FC = () => {
                   <textarea 
                     id="message" 
                     rows={4} 
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     placeholder="Your message"
                   ></textarea>

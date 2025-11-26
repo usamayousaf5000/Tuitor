@@ -41,7 +41,7 @@ export default function Home() {
       </section>
       
       {/* How It Works Section */}
-      <section className="relative py-16 overflow-hidden">
+      <section id="how-it-works" className="relative py-16 overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"

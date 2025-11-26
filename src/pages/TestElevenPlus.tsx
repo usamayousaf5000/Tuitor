@@ -1,32 +1,88 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 const TestElevenPlus: React.FC = () => {
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const heroImg = new Image();
+    heroImg.src = '/images/11+.jpg';
+    heroImg.onload = () => setHeroImageLoaded(true);
+  }, []);
+
   return (
-    <main className="pt-28 pb-16 px-6 sm:px-10 lg:px-16 bg-white">
+    <main className="bg-white">
       {/* Hero Section */}
-      <section className="bg-blue-900 text-white py-16 px-6 rounded-xl mb-12">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.div
+      <section className="relative h-[600px] pt-28 pb-16 px-6 sm:px-10 lg:px-16 text-white overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0 h-[600px]">
+          {/* Loading Skeleton */}
+          {!heroImageLoaded && (
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-200 via-blue-300 to-blue-200 h-full"
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              style={{
+                backgroundSize: '200% 100%',
+              }}
+            />
+          )}
+          {/* Actual Image */}
+          <motion.div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat h-full"
+            style={{
+              backgroundImage: 'url(/images/11+.jpg)',
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: heroImageLoaded ? 1 : 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+          </motion.div>
+          <div className="absolute inset-0 bg-blue-900/70 h-full"></div>
+        </div>
+        <div className="relative z-10 max-w-6xl mx-auto text-center h-full flex flex-col justify-center">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="text-4xl sm:text-5xl font-bold mb-6"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6">11+ Test Preparation (UK)</h1>
-            <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">Specialized 11+ tutoring covering verbal reasoning, non-verbal reasoning, English, and maths for grammar school entrance.</p>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            11+ Test Preparation (UK)
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+            className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto"
+          >
+            Specialized 11+ tutoring covering verbal reasoning, non-verbal reasoning, English, and maths for grammar school entrance.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <Link href="/pricing" className="inline-block px-8 py-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors text-lg shadow-md">
               Book Free Lesson
             </Link>
-            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      <section className="mt-12 grid md:grid-cols-3 gap-6">
+      <section className="pb-16 px-6 sm:px-10 lg:px-16">
+        <div className="max-w-6xl mx-auto">
+          <section className="mt-12 grid md:grid-cols-3 gap-6">
         {[{t:'Ready to Learn',d:'Live online lessons'}, {t:'Affordable Rates',d:'Great value plans'}, {t:'Superior Quality Tutoring',d:'Experienced specialists'}].map((c, index)=> (
           <motion.div 
             key={c.t} 
@@ -41,10 +97,10 @@ const TestElevenPlus: React.FC = () => {
             <p className="mt-2 text-slate-300/90 text-sm">{c.d}</p>
           </motion.div>
         ))}
-      </section>
+          </section>
 
-      {/* What is 11+ Section */}
-      <section className="max-w-6xl mx-auto mb-12">
+          {/* What is 11+ Section */}
+          <section className="max-w-6xl mx-auto mb-12">
         <motion.div
           className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100"
           initial={{ opacity: 0, y: 30 }}
@@ -432,6 +488,8 @@ const TestElevenPlus: React.FC = () => {
             ))}
           </div>
         </motion.div>
+          </section>
+        </div>
       </section>
     </main>
   );
