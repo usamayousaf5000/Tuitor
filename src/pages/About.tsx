@@ -1,24 +1,58 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaGraduationCap, FaUsers, FaChartLine, FaAward,} from 'react-icons/fa';
 
 const About: React.FC = () => {
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
+  const [storyImageLoaded, setStoryImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const heroImg = new Image();
+    heroImg.src = '/images/about.jpg';
+    heroImg.onload = () => setHeroImageLoaded(true);
+
+    const storyImg = new Image();
+    storyImg.src = '/images/ST.jpg';
+    storyImg.onload = () => setStoryImageLoaded(true);
+  }, []);
+
   return (
     <main className="bg-white text-gray-800">
       {/* Hero Section */}
       <section className="relative h-[600px] pt-28 pb-16 px-6 sm:px-10 lg:px-16 text-white overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0 h-[600px]">
-          <div 
+          {/* Loading Skeleton */}
+          {!heroImageLoaded && (
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-200 via-blue-300 to-blue-200 h-full"
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              style={{
+                backgroundSize: '200% 100%',
+              }}
+            />
+          )}
+          {/* Actual Image */}
+          <motion.div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat h-full"
             style={{
               backgroundImage: 'url(/images/about.jpg)',
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: heroImageLoaded ? 1 : 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-          </div>
+          </motion.div>
           <div className="absolute inset-0 bg-blue-900/70 h-full"></div>
         </div>
         <div className="relative z-10 max-w-6xl mx-auto text-center h-full flex flex-col justify-center">
@@ -79,13 +113,34 @@ const About: React.FC = () => {
       <section className="relative py-20 px-6 sm:px-10 lg:px-16 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <div 
+          {/* Loading Skeleton */}
+          {!storyImageLoaded && (
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-200 via-blue-300 to-blue-200"
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              style={{
+                backgroundSize: '200% 100%',
+              }}
+            />
+          )}
+          {/* Actual Image */}
+          <motion.div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: 'url(/images/ST.jpg)',
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: storyImageLoaded ? 1 : 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-          </div>
+          </motion.div>
           <div className="absolute inset-0 bg-blue-900/70"></div>
         </div>
         
@@ -126,7 +181,7 @@ const About: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <p className="text-white text-lg mb-6 leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]">
-                Tuitor was founded in 2010 by a team of dedicated educators and technology experts who recognized the need for personalized, accessible online tutoring. What began as a small initiative has evolved into a comprehensive educational platform serving students worldwide.
+                Think Hub Tutors was founded in 2016 by a team of dedicated educators and technology experts who recognized the need for personalized, accessible online tutoring. What began as a small initiative has evolved into a comprehensive educational platform serving students worldwide.
               </p>
               <p className="text-white mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]">
                 Our mission has always been to provide accessible, high-quality education that adapts to each student's unique learning style and needs. We believe that every student has the potential to excel with the right guidance and support.

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -32,19 +32,48 @@ const tiers = [
 ];
 
 const Pricing: React.FC = () => {
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const heroImg = new Image();
+    heroImg.src = '/images/HomeHero.jpg';
+    heroImg.onload = () => setHeroImageLoaded(true);
+  }, []);
+
   return (
     <main className="bg-white text-gray-800">
       {/* Hero Section */}
       <section className="relative h-[600px] pt-28 pb-16 px-6 sm:px-10 lg:px-16 text-white overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0 h-[600px]">
-          <div 
+          {/* Loading Skeleton */}
+          {!heroImageLoaded && (
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-200 via-blue-300 to-blue-200 h-full"
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              style={{
+                backgroundSize: '200% 100%',
+              }}
+            />
+          )}
+          {/* Actual Image */}
+          <motion.div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat h-full"
             style={{
-              backgroundImage: 'url(/images/pricing.jpg)',
+              backgroundImage: 'url(/images/HomeHero.jpg)',
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: heroImageLoaded ? 1 : 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-          </div>
+          </motion.div>
           <div className="absolute inset-0 bg-blue-900/70 h-full"></div>
         </div>
         <div className="relative z-10 max-w-6xl mx-auto text-center h-full flex flex-col justify-center">

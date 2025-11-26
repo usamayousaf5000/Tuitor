@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, Star, Users, Shield } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const Hero: React.FC = () => {
@@ -20,17 +20,6 @@ const Hero: React.FC = () => {
     animate: { opacity: 1, x: 0 },
     transition: { duration: prefersReducedMotion ? 0 : 0.6, delay: prefersReducedMotion ? 0 : 0.2, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] }
   };
-
-  const floatAnimation = prefersReducedMotion 
-    ? {} 
-    : { 
-        y: [-8, 8, -8], 
-        transition: { 
-          duration: 4, 
-          repeat: Infinity, 
-          ease: "easeInOut" as const
-        } 
-      };
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
@@ -49,11 +38,6 @@ const Hero: React.FC = () => {
             {...fadeInUp}
             style={{ willChange: 'transform, opacity' }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm mb-6">
-              <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-sm font-medium text-slate-600">Accepting new students for 2025</span>
-            </div>
-
             <h1 className="text-5xl lg:text-7xl font-bold leading-tight tracking-tight text-slate-900 mb-6">
               Unlock Your <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
@@ -70,9 +54,19 @@ const Hero: React.FC = () => {
               <Link href="/register" className="btn-primary text-lg px-8 py-4 shadow-xl shadow-primary-500/20 hover:scale-105 transition-transform">
                 Start Learning Now
               </Link>
-              <Link href="/how-it-works" className="btn-secondary text-lg px-8 py-4 hover:bg-slate-50">
+              <a 
+                href="#how-it-works" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.getElementById('how-it-works');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className="btn-secondary text-lg px-8 py-4 hover:bg-slate-50"
+              >
                 How It Works
-              </Link>
+              </a>
             </div>
 
             <div className="flex items-center gap-8 text-slate-500">
@@ -103,44 +97,6 @@ const Hero: React.FC = () => {
                 alt="Student learning online"
                 className="w-full h-auto object-cover scale-105 hover:scale-110 transition-transform duration-700"
               />
-
-              {/* Floating Cards */}
-              <motion.div
-                animate={floatAnimation}
-                className="absolute top-8 right-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 max-w-[200px]"
-                style={{ willChange: 'transform' }}
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-yellow-100 rounded-lg text-yellow-600">
-                    <Star className="w-5 h-5 fill-current" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-500 font-medium">Rating</p>
-                    <p className="text-lg font-bold text-slate-900">4.9/5.0</p>
-                  </div>
-                </div>
-                <p className="text-xs text-slate-500">Based on 2,000+ reviews</p>
-              </motion.div>
-
-              <motion.div
-                animate={prefersReducedMotion ? {} : { y: [8, -8, 8], transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const, delay: 1 } }}
-                className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50"
-                style={{ willChange: 'transform' }}
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex -space-x-3">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center overflow-hidden">
-                        <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" />
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-slate-900">10k+ Students</p>
-                    <p className="text-xs text-slate-500">Joined this month</p>
-                  </div>
-                </div>
-              </motion.div>
             </div>
 
             {/* Decorative Elements */}

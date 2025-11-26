@@ -1,23 +1,156 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaHeadset, FaComments } from 'react-icons/fa';
 
 const Contact: React.FC = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [heroImageLoaded, setHeroImageLoaded] = useState(false);
+  const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [touched, setTouched] = useState<{[key: string]: boolean}>({});
+
+  useEffect(() => {
+    const heroImg = new Image();
+    heroImg.src = '/images/contact.jpg';
+    heroImg.onload = () => setHeroImageLoaded(true);
+  }, []);
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateField = (name: string, value: string) => {
+    let error = '';
+    
+    switch (name) {
+      case 'firstName':
+        if (!value.trim()) {
+          error = 'First name is required';
+        }
+        break;
+      case 'lastName':
+        if (!value.trim()) {
+          error = 'Last name is required';
+        }
+        break;
+      case 'email':
+        if (!value.trim()) {
+          error = 'Email is required';
+        } else if (!validateEmail(value)) {
+          error = 'Please enter a valid email address';
+        }
+        break;
+      case 'message':
+        if (!value.trim()) {
+          error = 'Message is required';
+        } else if (value.trim().length < 10) {
+          error = 'Message must be at least 10 characters';
+        }
+        break;
+    }
+    
+    return error;
+  };
+
+  const handleBlur = (name: string) => {
+    setTouched({ ...touched, [name]: true });
+    const value = name === 'firstName' ? firstName : 
+                  name === 'lastName' ? lastName :
+                  name === 'email' ? email :
+                  name === 'message' ? message : '';
+    const error = validateField(name, value);
+    setErrors({ ...errors, [name]: error });
+  };
+
+  const isFormValid = () => {
+    return firstName.trim() !== '' &&
+           lastName.trim() !== '' &&
+           email.trim() !== '' &&
+           validateEmail(email) &&
+           message.trim() !== '' &&
+           message.trim().length >= 10;
+  };
+
+  const sendWhatsApp = () => {
+    const whatsappMessage = `Hello! I would like to get in touch.
+
+Name: ${firstName} ${lastName}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
+Subject: ${subject || 'Not provided'}
+
+Message:
+${message}`;
+
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    window.open("https://wa.me/447367067438?text=" + encodedMessage, "_blank");
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Validate all fields
+    const newErrors: {[key: string]: string} = {};
+    newErrors.firstName = validateField('firstName', firstName);
+    newErrors.lastName = validateField('lastName', lastName);
+    newErrors.email = validateField('email', email);
+    newErrors.message = validateField('message', message);
+    
+    setErrors(newErrors);
+    setTouched({
+      firstName: true,
+      lastName: true,
+      email: true,
+      message: true,
+    });
+    
+    // Only submit if form is valid
+    if (isFormValid()) {
+      sendWhatsApp();
+    }
+  };
+
   return (
     <main className="bg-white text-gray-800">
       {/* Hero Section */}
       <section className="relative h-[600px] pt-28 pb-16 px-6 sm:px-10 lg:px-16 text-white overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0 h-[600px]">
-          <div 
+          {/* Loading Skeleton */}
+          {!heroImageLoaded && (
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-200 via-blue-300 to-blue-200 h-full"
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              style={{
+                backgroundSize: '200% 100%',
+              }}
+            />
+          )}
+          {/* Actual Image */}
+          <motion.div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat h-full"
             style={{
               backgroundImage: 'url(/images/contact.jpg)',
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: heroImageLoaded ? 1 : 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-          </div>
+          </motion.div>
           <div className="absolute inset-0 bg-blue-900/70 h-full"></div>
         </div>
         <div className="relative z-10 max-w-6xl mx-auto text-center h-full flex flex-col justify-center">
@@ -83,41 +216,91 @@ const Contact: React.FC = () => {
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               <h2 className="text-3xl font-bold text-blue-900 mb-8">Send Us a Message</h2>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="firstName" className="block text-gray-700 font-medium mb-2">First Name</label>
+                    <label htmlFor="firstName" className="block text-gray-700 font-medium mb-2">First Name <span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       id="firstName" 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      value={firstName}
+                      onChange={(e) => {
+                        setFirstName(e.target.value);
+                        if (touched.firstName) {
+                          setErrors({ ...errors, firstName: validateField('firstName', e.target.value) });
+                        }
+                      }}
+                      onBlur={() => handleBlur('firstName')}
+                      required
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                        errors.firstName && touched.firstName
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'border-gray-300 focus:ring-blue-500'
+                      }`}
                       placeholder="Your first name"
                     />
+                    {errors.firstName && touched.firstName && (
+                      <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                    )}
                   </div>
                   <div>
-                    <label htmlFor="lastName" className="block text-gray-700 font-medium mb-2">Last Name</label>
+                    <label htmlFor="lastName" className="block text-gray-700 font-medium mb-2">Last Name <span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       id="lastName" 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      value={lastName}
+                      onChange={(e) => {
+                        setLastName(e.target.value);
+                        if (touched.lastName) {
+                          setErrors({ ...errors, lastName: validateField('lastName', e.target.value) });
+                        }
+                      }}
+                      onBlur={() => handleBlur('lastName')}
+                      required
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                        errors.lastName && touched.lastName
+                          ? 'border-red-500 focus:ring-red-500'
+                          : 'border-gray-300 focus:ring-blue-500'
+                      }`}
                       placeholder="Your last name"
                     />
+                    {errors.lastName && touched.lastName && (
+                      <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+                    )}
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email</label>
+                  <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email <span className="text-red-500">*</span></label>
                   <input 
                     type="email" 
                     id="email" 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (touched.email) {
+                        setErrors({ ...errors, email: validateField('email', e.target.value) });
+                      }
+                    }}
+                    onBlur={() => handleBlur('email')}
+                    required
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                      errors.email && touched.email
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-blue-500'
+                    }`}
                     placeholder="Your email address"
                   />
+                  {errors.email && touched.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">Phone (Optional)</label>
                   <input 
                     type="tel" 
                     id="phone" 
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     placeholder="Your phone number"
                   />
@@ -126,6 +309,8 @@ const Contact: React.FC = () => {
                   <label htmlFor="subject" className="block text-gray-700 font-medium mb-2">Subject</label>
                   <select 
                     id="subject" 
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                   >
                     <option value="">Select a subject</option>
@@ -137,19 +322,40 @@ const Contact: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Message</label>
+                  <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Message <span className="text-red-500">*</span></label>
                   <textarea 
                     id="message" 
                     rows={4} 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    value={message}
+                    onChange={(e) => {
+                      setMessage(e.target.value);
+                      if (touched.message) {
+                        setErrors({ ...errors, message: validateField('message', e.target.value) });
+                      }
+                    }}
+                    onBlur={() => handleBlur('message')}
+                    required
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                      errors.message && touched.message
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-blue-500'
+                    }`}
                     placeholder="Your message"
                   ></textarea>
+                  {errors.message && touched.message && (
+                    <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                  )}
                 </div>
                 <motion.button 
                   type="submit" 
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-bold text-lg hover:bg-blue-700 transition-all duration-300 shadow-md"
+                  disabled={!isFormValid()}
+                  whileHover={isFormValid() ? { scale: 1.02 } : {}}
+                  whileTap={isFormValid() ? { scale: 0.98 } : {}}
+                  className={`w-full py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 shadow-md ${
+                    isFormValid()
+                      ? 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  }`}
                 >
                   Send Message
                 </motion.button>

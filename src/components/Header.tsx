@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, GraduationCap, Phone, Home, Info, CreditCard } from 'lucide-react';
+import { Menu, X, GraduationCap, Phone, Home, Info, CreditCard, BookOpen } from 'lucide-react';
 import clsx from 'clsx';
 
 const Header: React.FC = () => {
@@ -83,6 +83,21 @@ const Header: React.FC = () => {
           >
             Get Started
           </Link>
+          <Link
+            href="/blog"
+            className={clsx(
+              'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200',
+              pathname === '/blog'
+                ? scrolled || isHomePage
+                  ? 'bg-primary-50 text-primary-700'
+                  : 'bg-white/20 text-white'
+                : scrolled || isHomePage
+                  ? 'text-slate-600 hover:text-primary-600 hover:bg-slate-50'
+                  : 'text-white hover:text-white hover:bg-white/20'
+            )}
+          >
+            Blog
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -122,6 +137,15 @@ const Header: React.FC = () => {
                   <span className="font-medium text-slate-700">{link.name}</span>
                 </Link>
               ))}
+
+              <Link
+                href="/blog"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 transition-colors"
+              >
+                <BookOpen className="w-5 h-5 text-slate-400" />
+                <span className="font-medium text-slate-700">Blog</span>
+              </Link>
 
               <div className="pt-6 px-4">
                 <Link
