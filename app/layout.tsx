@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import '../src/index.css';
 import Header from '../src/components/Header';
 import Footer from '../src/components/Footer';
+import ImagePreloader from '../src/components/ImagePreloader';
 
 export const metadata: Metadata = {
   title: 'Tuitor - Expert Online Tutoring',
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-white text-slate-800 relative">
+        <ImagePreloader />
         <Header />
         {children}
         <Footer />
