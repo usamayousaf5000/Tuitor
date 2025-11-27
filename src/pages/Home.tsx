@@ -15,15 +15,15 @@ const Home: React.FC<Props> = ({ onContact }) => {
       <section className="bg-blue-900 text-white">
         <Hero />
       </section>
-      
+
       {/* Why Choose Us Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-blue-900">Why Choose Tuitor?</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-blue-900">Why Choose Tutor?</h2>
           <Features />
         </div>
       </section>
-      
+
       {/* Popular Subjects Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -34,26 +34,26 @@ const Home: React.FC<Props> = ({ onContact }) => {
           <Subjects />
         </div>
       </section>
-      
+
       {/* How It Works Section */}
       <section className="py-16 bg-blue-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-blue-900">How Tuitor Works</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-blue-900">How Tutor Works</h2>
           <HowItWorks />
         </div>
       </section>
-      
+
       {/* Testimonials Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-4 text-blue-900">What Our Students Say</h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Hear from our students who have achieved academic success with Tuitor.
+            Hear from our students who have achieved academic success with Tutor.
           </p>
           <Testimonials />
         </div>
       </section>
-      
+
       {/* Final CTA Section */}
       <section className="py-16 bg-blue-900 text-white">
         <div className="container mx-auto px-4">
