@@ -32,7 +32,7 @@ const Pricing: React.FC = () => {
       setTimeout(() => {
         const pricingSection = document.getElementById('pricing-cards');
         if (pricingSection) {
-          pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          pricingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }, 100);
     }
