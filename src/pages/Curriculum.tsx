@@ -1,21 +1,78 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaGraduationCap, FaBook, FaChalkboardTeacher, FaCheckCircle } from 'react-icons/fa';
+import TestElevenPlus from './TestElevenPlus';
+import TestNaplan from './TestNaplan';
 
 const countries = [
-  { flag: '🇬🇧', name: 'United Kingdom', curricula: ['National Curriculum', 'GCSE', 'A-Levels'] },
-  { flag: '🇮🇪', name: 'Ireland', curricula: ['Junior Certificate', 'Leaving Certificate'] },
-  { flag: '🇺🇸', name: 'United States', curricula: ['Common Core', 'AP Courses', 'SAT/ACT Prep'] },
-  { flag: '🇨🇦', name: 'Canada', curricula: ['Provincial Curricula', 'IB Programs'] },
-  { flag: '🇦🇺', name: 'Australia', curricula: ['Australian Curriculum', 'NAPLAN', 'HSC'] },
-  { flag: '🇳🇿', name: 'New Zealand', curricula: ['NCEA', 'Cambridge International'] },
+  {
+    name: 'United Kingdom',
+    flag: '/images/UK.jpeg',
+    link: '/test/11-plus',
+    curricula: ['National Curriculum', 'GCSE', 'A-Levels'],
+    details: [
+      { title: 'National Curriculum', description: 'Comprehensive support for Key Stages 1-4, ensuring a strong foundation in core subjects.' },
+      { title: 'GCSE', description: 'Targeted preparation for GCSE exams across all major boards (AQA, Edexcel, OCR).' },
+      { title: 'A-Levels', description: 'Advanced subject tutoring to help students achieve top grades for university admissions.' }
+    ]
+  },
+  {
+    name: 'Canada',
+    flag: '/images/CA.jpeg',
+    curricula: ['Provincial Curricula', 'IB Programs'],
+    details: [
+      { title: 'Provincial Curricula', description: 'Tailored tutoring for Ontario, BC, Alberta, and other provincial education systems.' },
+      { title: 'IB Programs', description: 'Specialized support for the International Baccalaureate Diploma Programme and Middle Years Programme.' }
+    ]
+  },
+  {
+    name: 'Australia',
+    flag: '/images/AUS.jpeg',
+    link: '/test/naplan',
+    curricula: ['Australian Curriculum', 'NAPLAN', 'HSC'],
+    details: [
+      { title: 'Australian Curriculum', description: 'Support for Foundation to Year 10, covering all learning areas and general capabilities.' },
+      { title: 'NAPLAN', description: 'Preparation for numeracy and literacy assessments to build confidence and skills.' },
+      { title: 'HSC', description: 'Focused tutoring for the Higher School Certificate to achieve top ATAR results.' }
+    ]
+  },
+  {
+    name: 'United States',
+    flag: '/images/US.jpeg',
+    curricula: ['Common Core', 'AP Courses', 'SAT/ACT Prep'],
+    details: [
+      { title: 'Common Core', description: 'Aligned with state standards to ensure students master grade-level skills in Math and English.' },
+      { title: 'AP Courses', description: 'College-level course support to help students excel in Advanced Placement exams.' },
+      { title: 'SAT/ACT Prep', description: 'Strategic test preparation to boost scores for college applications.' }
+    ]
+  },
+  {
+    name: 'New Zealand',
+    flag: '/images/NZ.jpeg',
+    curricula: ['NCEA', 'Cambridge International'],
+    details: [
+      { title: 'NCEA', description: 'Guidance for Levels 1, 2, and 3 of the National Certificate of Educational Achievement.' },
+      { title: 'Cambridge International', description: 'Expert support for Cambridge IGCSE and A-Level pathways within NZ schools.' }
+    ]
+  },
+  {
+    name: 'Ireland',
+    flag: '/images/IR.jpeg',
+    curricula: ['Junior Certificate', 'Leaving Certificate'],
+    details: [
+      { title: 'Junior Certificate', description: 'Support for the Junior Cycle, focusing on classroom-based assessments and final exams.' },
+      { title: 'Leaving Certificate', description: 'Intensive preparation for the Leaving Cert to maximize CAO points for college entry.' }
+    ]
+  },
 ];
 
 const Curriculum: React.FC = () => {
   const [heroImageLoaded, setHeroImageLoaded] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<typeof countries[0] | null>(null);
 
   useEffect(() => {
     const heroImg = new Image();
@@ -23,6 +80,53 @@ const Curriculum: React.FC = () => {
     heroImg.onload = () => setHeroImageLoaded(true);
   }, []);
 
+  // If a country is selected, show its specific component or the generic detail view
+  if (selectedCountry) {
+    return (
+      <div className="bg-white min-h-screen">
+        {/* Navigation Bar Placeholder / Back Button */}
+        <div className="bg-white border-b border-gray-100 sticky top-0 z-50 px-6 py-4 shadow-sm">
+          <div className="max-w-6xl mx-auto">
+            <button
+              onClick={() => setSelectedCountry(null)}
+              className="flex items-center text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to All Curricula
+            </button>
+          </div>
+        </div>
+
+        {/* Coming Soon View */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center justify-center py-24 px-4 min-h-[50vh]"
+        >
+          <div className="w-32 h-32 mb-8 relative rounded-full overflow-hidden shadow-xl border-4 border-blue-50">
+            <img
+              src={selectedCountry.flag}
+              alt={selectedCountry.name}
+              className="w-full h-full object-cover opacity-90"
+            />
+          </div>
+          <h2 className="text-4xl font-bold text-blue-900 mb-6">Coming Soon</h2>
+          <p className="text-xl text-gray-600 max-w-lg text-center mb-10 leading-relaxed">
+            We're currently developing our specialized curriculum for <span className="font-semibold text-blue-700">{selectedCountry.name}</span>.
+            <br />Stay tuned for updates!
+          </p>
+          <Link href="/contact" className="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            Contact Us for Inquiries
+          </Link>
+        </motion.div>
+      </div>
+    );
+  }
+
+  // Default View: Hero + Grid
   return (
     <main className="bg-white text-gray-800">
       {/* Hero Section */}
@@ -47,7 +151,7 @@ const Curriculum: React.FC = () => {
             />
           )}
           {/* Actual Image */}
-          <motion.div 
+          <motion.div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat h-full"
             style={{
               backgroundImage: 'url(/images/curriculum.jpg)',
@@ -60,7 +164,7 @@ const Curriculum: React.FC = () => {
           <div className="absolute inset-0 bg-blue-900/70 h-full"></div>
         </div>
         <div className="relative z-10 max-w-6xl mx-auto text-center h-full flex flex-col justify-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -68,7 +172,7 @@ const Curriculum: React.FC = () => {
           >
             Global Curriculum Coverage
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
@@ -76,7 +180,7 @@ const Curriculum: React.FC = () => {
           >
             Expert tutoring across international educational standards and exam preparation.
           </motion.p>
-          <motion.div 
+          <motion.div
             className="mt-10 flex justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -91,140 +195,65 @@ const Curriculum: React.FC = () => {
         </div>
       </section>
 
-      {/* Curriculum Overview */}
-      <section className="py-16 px-6 sm:px-10 lg:px-16 bg-white">
+      {/* Main Content Area */}
+      <section className="py-20 px-6 sm:px-10 lg:px-16 bg-white min-h-[600px]">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
-          >
-            <h2 className="text-3xl font-bold text-blue-900 mb-4">Comprehensive Curriculum Support</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-blue-900 mb-4">Select Your Region</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our expert tutors are well-versed in educational standards across multiple countries and systems.
+              Choose a country to explore specific curriculum and test preparation options.
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {[
-              {
-                icon: <FaGraduationCap className="text-white text-2xl" />,
-                title: 'K-12 Education',
-                description: 'Comprehensive support for elementary, middle, and high school students across all major subjects and curricula.',
-                items: ['Core subjects alignment', 'Homework assistance', 'Test preparation']
-              },
-              {
-                icon: <FaBook className="text-white text-2xl" />,
-                title: 'Standardized Tests',
-                description: 'Expert preparation for all major standardized tests including SAT, ACT, AP exams, GCSE, A-Levels, and more.',
-                items: ['Test-taking strategies', 'Practice exams', 'Score improvement']
-              },
-              {
-                icon: <FaChalkboardTeacher className="text-white text-2xl" />,
-                title: 'University Courses',
-                description: 'Support for undergraduate and graduate-level courses across a wide range of disciplines and specializations.',
-                items: ['Advanced topics', 'Research assistance', 'Exam preparation']
-              }
-            ].map((item, index) => (
-              <motion.div 
-                key={item.title}
-                initial={{ opacity: 0, y: 50, rotateX: -15 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15, type: "spring", bounce: 0.3 }}
-                whileHover={{ y: -12, rotateY: 5, scale: 1.02, transition: { duration: 0.3 } }}
-                className="bg-blue-50 p-8 rounded-xl shadow-lg"
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                <motion.div 
-                  className="bg-blue-600 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6"
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+            {countries.map((country, index) => {
+              const CardContent = (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className="cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 group h-full"
                 >
-                  {item.icon}
+                  <div className="h-48 overflow-hidden relative">
+                    <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+                    <img
+                      src={country.flag}
+                      alt={`${country.name} flag`}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+                  </div>
+                  <div className="p-6 text-center">
+                    <h3 className="text-xl font-bold text-blue-900 group-hover:text-blue-600 transition-colors">
+                      {country.name}
+                    </h3>
+                    {country.link && (
+                      <span className="inline-block mt-2 text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                        Specialized Prep Available
+                      </span>
+                    )}
+                  </div>
                 </motion.div>
-                <h3 className="text-2xl font-bold text-blue-900 mb-4">{item.title}</h3>
-                <p className="text-gray-600 mb-6">{item.description}</p>
-                <ul className="space-y-2">
-                  {item.items.map((listItem, i) => (
-                    <motion.li 
-                      key={listItem}
-                      className="flex items-center"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.1 + i * 0.05 }}
-                    >
-                      <FaCheckCircle className="text-green-500 mr-2" />
-                      <span>{listItem}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* Countries grid */}
-      <section className="py-16 px-6 sm:px-10 lg:px-16 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <motion.div 
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
-          >
-            <h2 className="text-3xl font-bold text-blue-900 mb-4">Global Curriculum Coverage</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our tutors are experts in educational systems from around the world.
-            </p>
-          </motion.div>
+              );
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {countries.map((country, index) => (
-              <motion.div 
-                key={country.name} 
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1, type: "spring", bounce: 0.3 }}
-                whileHover={{ y: -12, scale: 1.02, transition: { duration: 0.3 } }}
-                className="bg-white p-8 rounded-xl shadow-lg transform transition-all duration-300"
-              >
-                <div className="flex items-center mb-6">
-                  <motion.span 
-                    className="text-5xl mr-4"
-                    animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                  >
-                    {country.flag}
-                  </motion.span>
-                  <h3 className="text-2xl font-bold text-blue-900">{country.name}</h3>
+              if (country.link) {
+                return (
+                  <Link key={country.name} href={country.link} className="block h-full">
+                    {CardContent}
+                  </Link>
+                );
+              }
+
+              return (
+                <div key={country.name} onClick={() => setSelectedCountry(country)} className="h-full">
+                  {CardContent}
                 </div>
-                <ul className="space-y-3">
-                  {country.curricula.map((curriculum, i) => (
-                    <motion.li 
-                      key={curriculum} 
-                      className="flex items-center"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.1 + i * 0.05 }}
-                    >
-                      <FaCheckCircle className="text-green-500 mr-3" />
-                      <span className="text-gray-700">{curriculum}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
 
-          <motion.div 
+          <motion.div
             className="mt-16 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
