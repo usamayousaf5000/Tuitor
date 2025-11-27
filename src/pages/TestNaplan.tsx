@@ -378,7 +378,7 @@ const TestNaplan: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <h3 className="font-semibold text-xl mb-4">Why Choose Tuitor for NAPLAN Preparation?</h3>
+              <h3 className="font-semibold text-xl mb-4">Why Choose Tutor for NAPLAN Preparation?</h3>
               <ul className="space-y-3 text-blue-100">
                 <li className="flex items-start">
                   <span className="mr-2">✓</span>

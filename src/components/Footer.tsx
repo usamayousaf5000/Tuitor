@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
 
       <div className="container-page relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* Column 1: Tuitor */}
+          {/* Column 1: Tutor */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 group">
               <span className="text-2xl font-bold text-white">Think Hub Tutors</span>

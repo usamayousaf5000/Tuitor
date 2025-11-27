@@ -8,7 +8,7 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const Hero: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
-  
+
   const fadeInUp = {
     initial: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
     animate: { opacity: 1, y: 0 },
@@ -47,15 +47,15 @@ const Hero: React.FC = () => {
 
             <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg">
               Expert online tutoring tailored to your unique learning style.
-              Join thousands of students achieving academic excellence with Tuitor.
+              Join thousands of students achieving academic excellence with Tutor.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <Link href="/register" className="btn-primary text-lg px-8 py-4 shadow-xl shadow-primary-500/20 hover:scale-105 transition-transform">
                 Start Learning Now
               </Link>
-              <a 
-                href="#how-it-works" 
+              <a
+                href="#how-it-works"
                 onClick={(e) => {
                   e.preventDefault();
                   const element = document.getElementById('how-it-works');
