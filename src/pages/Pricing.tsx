@@ -25,6 +25,19 @@ const Pricing: React.FC = () => {
     heroImg.onload = () => setHeroImageLoaded(true);
   }, []);
 
+  // Scroll to pricing cards when country is selected
+  useEffect(() => {
+    if (selectedCountry) {
+      // Small delay to ensure content is rendered
+      setTimeout(() => {
+        const pricingSection = document.getElementById('pricing-cards');
+        if (pricingSection) {
+          pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [selectedCountry]);
+
   const getTiers = (currency: string, countryCode: string) => {
     // Base prices in GBP
     const standardGBP = 12;
@@ -194,7 +207,7 @@ const Pricing: React.FC = () => {
                 <p className="text-gray-600">Choose the plan that best fits your needs</p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-10">
+              <div id="pricing-cards" className="grid md:grid-cols-3 gap-10">
                 {getTiers(selectedCountry.currency, selectedCountry.code).map((tier, index) => (
                   <motion.div
                     key={tier.name}

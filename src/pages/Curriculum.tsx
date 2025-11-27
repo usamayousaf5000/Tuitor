@@ -80,6 +80,19 @@ const Curriculum: React.FC = () => {
     heroImg.onload = () => setHeroImageLoaded(true);
   }, []);
 
+  // Scroll to coming soon content when country is selected
+  useEffect(() => {
+    if (selectedCountry) {
+      // Small delay to ensure content is rendered
+      setTimeout(() => {
+        const comingSoonSection = document.getElementById('coming-soon-content');
+        if (comingSoonSection) {
+          comingSoonSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [selectedCountry]);
+
   // If a country is selected, show its specific component or the generic detail view
   if (selectedCountry) {
     return (
