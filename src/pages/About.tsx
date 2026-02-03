@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FaGraduationCap, FaUsers, FaChartLine, FaAward,} from 'react-icons/fa';
+import { FaGraduationCap, FaUsers, FaChartLine, FaAward, } from 'react-icons/fa';
 
 const About: React.FC = () => {
   const [heroImageLoaded, setHeroImageLoaded] = useState(false);
@@ -43,7 +43,7 @@ const About: React.FC = () => {
             />
           )}
           {/* Actual Image */}
-          <motion.div 
+          <motion.div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat h-full"
             style={{
               backgroundImage: 'url(/images/about.jpg)',
@@ -56,7 +56,7 @@ const About: React.FC = () => {
           <div className="absolute inset-0 bg-blue-900/70 h-full"></div>
         </div>
         <div className="relative z-10 max-w-6xl mx-auto text-center h-full flex flex-col justify-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -64,7 +64,7 @@ const About: React.FC = () => {
           >
             About Think Hub Tutors
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
@@ -80,13 +80,13 @@ const About: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              {key: 'Years Experience', value: '15+', icon: <FaGraduationCap className="w-10 h-10 text-blue-600" />},
-              {key: 'Students Taught', value: '5,000+', icon: <FaUsers className="w-10 h-10 text-blue-600" />},
-              {key: 'Avg. Grade Improvement', value: '+2 grades', icon: <FaChartLine className="w-10 h-10 text-blue-600" />},
-              {key: 'Expert Tutors', value: '100+', icon: <FaAward className="w-10 h-10 text-blue-600" />},
+              { key: 'Years Experience', value: '15+', icon: <FaGraduationCap className="w-10 h-10 text-blue-600" /> },
+              { key: 'Students Taught', value: '5,000+', icon: <FaUsers className="w-10 h-10 text-blue-600" /> },
+              { key: 'Avg. Grade Improvement', value: '+2 grades', icon: <FaChartLine className="w-10 h-10 text-blue-600" /> },
+              { key: 'Expert Tutors', value: '100+', icon: <FaAward className="w-10 h-10 text-blue-600" /> },
             ].map((stat, index) => (
-              <motion.div 
-                key={stat.key} 
+              <motion.div
+                key={stat.key}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -94,7 +94,7 @@ const About: React.FC = () => {
                 whileHover={{ y: -12, scale: 1.02, transition: { duration: 0.3 } }}
                 className="text-center p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300"
               >
-                <motion.div 
+                <motion.div
                   className="flex justify-center mb-5"
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
@@ -131,7 +131,7 @@ const About: React.FC = () => {
             />
           )}
           {/* Actual Image */}
-          <motion.div 
+          <motion.div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: 'url(/images/ST.jpg)',
@@ -143,17 +143,17 @@ const About: React.FC = () => {
           </motion.div>
           <div className="absolute inset-0 bg-blue-900/70"></div>
         </div>
-        
+
         {/* Content on top of image */}
         <div className="relative z-10 max-w-6xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
           >
-            <motion.h2 
+            <motion.h2
               className="text-4xl font-bold text-white mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -162,7 +162,7 @@ const About: React.FC = () => {
             >
               Our Story
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-white max-w-3xl mx-auto text-lg drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -172,7 +172,7 @@ const About: React.FC = () => {
               Transforming online education with personalized learning experiences
             </motion.p>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -190,7 +190,7 @@ const About: React.FC = () => {
                 Today, we continue to innovate and expand our services, incorporating the latest educational research and technology to deliver exceptional learning experiences that help students achieve their academic goals.
               </p>
             </motion.div>
-            <motion.div 
+            <motion.div
               className="bg-white/20 backdrop-blur-sm p-8 rounded-lg border border-white/30"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -229,7 +229,7 @@ const About: React.FC = () => {
       {/* Team Section */}
       <section className="py-16 px-6 sm:px-10 lg:px-16 bg-white">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -239,15 +239,15 @@ const About: React.FC = () => {
             <h2 className="text-3xl font-bold text-blue-900 mb-4">Our Leadership Team</h2>
             <p className="text-gray-600 max-w-3xl mx-auto">Meet the educators and experts behind Think Hub Tutors</p>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              {name: 'Dr. Sarah Johnson', role: 'Founder & CEO', bio: 'Former university professor with 15+ years in education technology'},
-              {name: 'Michael Chen', role: 'Chief Academic Officer', bio: 'Curriculum development expert with background in personalized learning'},
-              {name: 'Emma Williams', role: 'Head of Tutor Success', bio: 'Experienced educator focused on professional development and quality assurance'},
+              { name: 'Marry Sath', role: 'English Teacher', bio: 'Expert in English language and literature with a passion for teaching.' },
+              { name: 'Emy Joy', role: 'Math Teacher', bio: 'Dedicated Math tutor helping students master complex concepts with ease.' },
+              { name: 'Hannah Abi', role: 'Science Teacher', bio: 'Science enthusiast inspiring students to explore the wonders of the natural world.' },
             ].map((member, index) => (
-              <motion.div 
-                key={member.name} 
+              <motion.div
+                key={member.name}
                 initial={{ opacity: 0, y: 50, rotateX: -15 }}
                 whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                 viewport={{ once: true }}
@@ -256,7 +256,7 @@ const About: React.FC = () => {
                 className="text-center p-6 rounded-lg shadow-md border border-gray-100"
                 style={{ transformStyle: 'preserve-3d' }}
               >
-                <motion.div 
+                <motion.div
                   className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center"
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
@@ -274,7 +274,7 @@ const About: React.FC = () => {
 
       {/* CTA Section */}
       <section className="py-16 px-6 sm:px-10 lg:px-16 bg-blue-50">
-        <motion.div 
+        <motion.div
           className="max-w-4xl mx-auto text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
