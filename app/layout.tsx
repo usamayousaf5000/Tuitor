@@ -5,7 +5,11 @@ import Footer from '../src/components/Footer';
 import ImagePreloader from '../src/components/ImagePreloader';
 
 export const metadata: Metadata = {
-  title: 'Tuitor - Expert Online Tutoring',
+  metadataBase: new URL('https://www.thinkhubtutors.com'),
+  title: {
+    default: 'Think Hub Tutors',
+    template: '%s | Tutor',
+  },
   description: 'Expert online tutoring for students worldwide',
   verification: {
     google: '7Wb_AK4BLMqHDdLH5MfVxY11fbsW6wzXAQOuX0b6h64',
