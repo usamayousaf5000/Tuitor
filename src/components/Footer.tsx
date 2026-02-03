@@ -139,6 +139,12 @@ const Footer: React.FC = () => {
                     <span>Australia: +61 480 009 464</span>
                   </a>
                 </div>
+                <div className="flex items-center gap-2">
+                  <a href="tel:+19176197420" className="text-slate-400 hover:text-white transition-colors text-sm flex items-center gap-2">
+                    <span>🇺🇸</span>
+                    <span>USA: +1 (917) 619-7420</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

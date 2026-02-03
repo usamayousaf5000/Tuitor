@@ -233,8 +233,8 @@ ${message}`;
                       onBlur={() => handleBlur('firstName')}
                       required
                       className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${errors.firstName && touched.firstName
-                          ? 'border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:ring-blue-500'
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-blue-500'
                         }`}
                       placeholder="Your first name"
                     />
@@ -257,8 +257,8 @@ ${message}`;
                       onBlur={() => handleBlur('lastName')}
                       required
                       className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${errors.lastName && touched.lastName
-                          ? 'border-red-500 focus:ring-red-500'
-                          : 'border-gray-300 focus:ring-blue-500'
+                        ? 'border-red-500 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-blue-500'
                         }`}
                       placeholder="Your last name"
                     />
@@ -282,8 +282,8 @@ ${message}`;
                     onBlur={() => handleBlur('email')}
                     required
                     className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${errors.email && touched.email
-                        ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-300 focus:ring-blue-500'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : 'border-gray-300 focus:ring-blue-500'
                       }`}
                     placeholder="Your email address"
                   />
@@ -333,8 +333,8 @@ ${message}`;
                     onBlur={() => handleBlur('message')}
                     required
                     className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${errors.message && touched.message
-                        ? 'border-red-500 focus:ring-red-500'
-                        : 'border-gray-300 focus:ring-blue-500'
+                      ? 'border-red-500 focus:ring-red-500'
+                      : 'border-gray-300 focus:ring-blue-500'
                       }`}
                     placeholder="Your message"
                   ></textarea>
@@ -348,8 +348,8 @@ ${message}`;
                   whileHover={isFormValid() ? { scale: 1.02 } : {}}
                   whileTap={isFormValid() ? { scale: 0.98 } : {}}
                   className={`w-full py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 shadow-md ${isFormValid()
-                      ? 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer'
-                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    ? 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                     }`}
                 >
                   Send Message
@@ -368,7 +368,7 @@ ${message}`;
               <h2 className="text-3xl font-bold text-blue-900 mb-8">Contact Information</h2>
 
               {[
-                { icon: <FaPhone className="text-white text-2xl" />, title: 'Phone', items: ['🇬🇧 United Kingdom: +44 7367 067438', '🇨🇦 Canada: +1 (587) 870-0861', '🇦🇺 Australia: +61 480 009 464'] },
+                { icon: <FaPhone className="text-white text-2xl" />, title: 'Phone', items: ['🇬🇧 United Kingdom: +44 7367 067438', '🇨🇦 Canada: +1 (587) 870-0861', '🇦🇺 Australia: +61 480 009 464', '🇺🇸 USA: +1 (917) 619-7420'] },
                 { icon: <FaEnvelope className="text-white text-2xl" />, title: 'Email', items: ['thinkhubtutors@gmail.com'] },
                 { icon: <FaMapMarkerAlt className="text-white text-2xl" />, title: 'Office Location', items: ['Avenue HQ, 17 Mann Island', 'Liverpool L3 1BP', 'United Kingdom'] }
               ].map((contact, index) => (
