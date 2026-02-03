@@ -38,48 +38,38 @@ const Pricing: React.FC = () => {
     }
   }, [selectedCountry]);
 
-  const getTiers = (currency: string, countryCode: string) => {
-    // Base prices in GBP
-    const standardGBP = 12;
-    const premiumGBP = 17;
-
-    // Exchange rates (approximate)
-    const rates: { [key: string]: number } = {
-      '£': 1,      // GBP
-      '$': 1.27,   // USD/CAD/AUD/NZD (simplified)
-      '€': 1.17    // EUR
-    };
-
-    const rate = rates[currency] || 1;
-    const standardPrice = Math.round(standardGBP * rate);
-    const premiumPrice = Math.round(premiumGBP * rate);
-
-    // Determine grade terminology based on country
-    const gradeSystem = (countryCode === 'US' || countryCode === 'CA') ? 'Grade 1 to Grade 11' : 'Year 1 to Year 11';
-
+  const getTiers = (currency: string, _countryCode: string) => {
     return [
       {
         name: 'Standard',
-        price: `${currency}${standardPrice}/hr`,
-        description: `Perfect for ${gradeSystem} students looking to excel in their courses.`,
-        features: [],
-        recommended: true,
+        price: `${currency}15/hr`,
+        description: '',
+        features: [
+          '8 lessons/month',
+          'lesson duration : 60 min',
+          'Membership duration = Monthly'
+        ],
+        recommended: false,
         buttonText: 'Get Started',
         link: '/contact'
       },
       {
         name: 'Premium',
-        price: `${currency}${premiumPrice}/hr`,
-        description: `Advanced support for ${gradeSystem} students with specialized subject expertise.`,
-        features: [],
-        recommended: false,
+        price: `${currency}13/hr`,
+        description: '',
+        features: [
+          '12 lessons/month',
+          'lesson duration : 60 min',
+          'Membership duration = Monthly'
+        ],
+        recommended: true,
         buttonText: 'Get Started',
         link: '/contact'
       },
       {
         name: 'Custom',
         price: 'Contact Us',
-        description: 'Tailored solutions for unique learning requirements and goals.',
+        description: 'Design your package according to your needs.',
         features: [],
         recommended: false,
         buttonText: 'Contact Us',

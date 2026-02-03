@@ -7,6 +7,13 @@ import ImagePreloader from '../src/components/ImagePreloader';
 export const metadata: Metadata = {
   title: 'Tuitor - Expert Online Tutoring',
   description: 'Expert online tutoring for students worldwide',
+  verification: {
+    google: '7Wb_AK4BLMqHDdLH5MfVxY11fbsW6wzXAQOuX0b6h64',
+  },
+  icons: {
+    icon: '/images/LOGO.PNG',
+    apple: '/images/LOGO.PNG',
+  },
 };
 
 export default function RootLayout({
